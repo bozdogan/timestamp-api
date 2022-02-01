@@ -13,11 +13,11 @@ function parseTimestamp(date_str){
     const isValid = !isNaN(dateValue);
     
     if(isValid) {
-        return renderResponse(new Date(date));
+        return renderResponse(new Date(date_str));
     } else {
         // NOTE: If `date_str` is an integer assume it is a UNIX timestamp.
-        const timestamp = parseInt(date_str);
-        if(!isNaN(timestamp)) {
+        if(/^\d+$/.test(date_str)) {
+            const timestamp = parseInt(date_str);
             return renderResponse(new Date(timestamp*1000));
         }
     }
